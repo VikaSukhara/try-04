@@ -14,6 +14,9 @@ const getAllContacts = async (req, res, next) => {
   }
 };
 
+
+
+
 const getByID = async (req, res, next) => {
   try {
     const { contactId } = req.params;
