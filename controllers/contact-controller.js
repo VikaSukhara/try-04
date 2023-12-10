@@ -16,6 +16,20 @@ const getAllContacts = async (req, res, next) => {
 
 
 
+const addNewContact = async (req, res, next) => {
+  try {
+    const validatedResult = contactAddSchema.validate(req.body);
+    const error = validatedResult.error;
+    if (error) {
+      throw HttpError(400, error.message);
+    }
+    const result = await contactService.addContact(req.body);
+    res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 const getByID = async (req, res, next) => {
   try {
@@ -30,19 +44,7 @@ const getByID = async (req, res, next) => {
   }
 };
 
-const addNewContact = async (req, res, next) => {
-  try {
-    const validatedResult = contactAddSchema.validate(req.body);
-    const error = validatedResult.error;
-    if (error) {
-      throw HttpError(400, error.message);
-    }
-    const result = await contactService.addContact(req.body);
-    res.status(201).json(result);
-  } catch (error) {
-    next(error);
-  }
-};
+
 
 const updateById = async (req, res, next) => {
   try {
