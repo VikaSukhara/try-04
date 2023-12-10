@@ -14,18 +14,7 @@ const getAllContacts = async (req, res, next) => {
   }
 };
 
-const getByID = async (req, res, next) => {
-  try {
-    const { contactId } = req.params;
-    const result = await contactService.getContactById(contactId);
-    if (!result) {
-      throw HttpError(404, "Contact does not found");
-    }
-    res.json(result);
-  } catch (error) {
-    next(error);
-  }
-};
+
 
 const addNewContact = async (req, res, next) => {
   try {
@@ -40,6 +29,22 @@ const addNewContact = async (req, res, next) => {
     next(error);
   }
 };
+
+
+const getByID = async (req, res, next) => {
+  try {
+    const { contactId } = req.params;
+    const result = await contactService.getContactById(contactId);
+    if (!result) {
+      throw HttpError(404, "Contact does not found");
+    }
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 
 const updateById = async (req, res, next) => {
   try {
